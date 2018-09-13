@@ -187,6 +187,12 @@ async-each@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/async-each/-/async-each-1.0.1.tgz#19d386a1d9edc6e7c1c85d388aedbcc56d33602d"
 
+async@2.6.0:
+  version "2.6.0"
+  resolved "http://registry.npm.taobao.org/async/download/async-2.6.0.tgz#61a29abb6fcc026fea77e56d1c6ec53a795951f4"
+  dependencies:
+    lodash "^4.14.0"
+
 async@2.6.1:
   version "2.6.1"
   resolved "http://registry.npm.taobao.org/async/download/async-2.6.1.tgz#b245a23ca71930044ec53fa46aa00a3e87c6a610"
@@ -271,6 +277,10 @@ bluebird@3.5.0:
   version "3.5.0"
   resolved "http://registry.npm.taobao.org/bluebird/download/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
 
+bluebird@^3.0.5:
+  version "3.5.2"
+  resolved "http://registry.npm.taobao.org/bluebird/download/bluebird-3.5.2.tgz#1be0908e054a751754549c270489c1505d4ab15a"
+
 bluebird@^3.1.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
@@ -312,6 +322,10 @@ braces@^2.3.0, braces@^2.3.1:
 bson@~1.0.4, bson@~1.0.5:
   version "1.0.9"
   resolved "http://registry.npm.taobao.org/bson/download/bson-1.0.9.tgz#12319f8323b1254739b7c6bef8d3e89ae05a2f57"
+
+buffer-shims@~1.0.0:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/buffer-shims/download/buffer-shims-1.0.0.tgz#9978ce317388c649ad8793028c3477ef044a8b51"
 
 bytes@1:
   version "1.0.0"
@@ -761,6 +775,10 @@ es-to-primitive@^1.1.1:
     is-date-object "^1.0.1"
     is-symbol "^1.0.1"
 
+es6-promise@3.2.1:
+  version "3.2.1"
+  resolved "http://registry.npm.taobao.org/es6-promise/download/es6-promise-3.2.1.tgz#ec56233868032909207170c39448e24449dd1fc4"
+
 escape-html@~1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
@@ -1190,6 +1208,10 @@ has@^1.0.1:
   dependencies:
     function-bind "^1.1.1"
 
+hooks-fixed@2.0.2:
+  version "2.0.2"
+  resolved "http://registry.npm.taobao.org/hooks-fixed/download/hooks-fixed-2.0.2.tgz#20076daa07e77d8a6106883ce3f1722e051140b0"
+
 http-assert@^1.1.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/http-assert/-/http-assert-1.3.0.tgz#a31a5cf88c873ecbb5796907d4d6f132e8c01e4a"
@@ -1261,7 +1283,7 @@ inflight@^1.0.4:
     once "^1.3.0"
     wrappy "1"
 
-inherits@2, inherits@2.0.3, inherits@^2.0.1, inherits@~2.0.3:
+inherits@2, inherits@2.0.3, inherits@^2.0.1, inherits@~2.0.1, inherits@~2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
@@ -1572,6 +1594,10 @@ jstransformer@1.0.0:
     is-promise "^2.0.0"
     promise "^7.0.1"
 
+kareem@1.5.0:
+  version "1.5.0"
+  resolved "http://registry.npm.taobao.org/kareem/download/kareem-1.5.0.tgz#e3e4101d9dcfde299769daf4b4db64d895d17448"
+
 kareem@2.2.1:
   version "2.2.1"
   resolved "http://registry.npm.taobao.org/kareem/download/kareem-2.2.1.tgz#9950809415aa3cde62ab43b4f7b919d99816e015"
@@ -1750,7 +1776,7 @@ lodash.get@4.4.2:
   version "4.4.2"
   resolved "http://registry.npm.taobao.org/lodash.get/download/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
 
-lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0:
+lodash@^4.13.1, lodash@^4.14.0, lodash@^4.17.10, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0:
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
@@ -1873,6 +1899,21 @@ mkdirp@^0.5.0, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
+mongo-connector@^0.0.2:
+  version "0.0.2"
+  resolved "http://registry.npm.taobao.org/mongo-connector/download/mongo-connector-0.0.2.tgz#84662210c2ce95e65c89db9a7bd936454f82dd16"
+  dependencies:
+    bluebird "^3.0.5"
+    mongoose "^4.2.4"
+    mongoose-timestamp "^0.4.0"
+
+mongodb-core@2.1.18:
+  version "2.1.18"
+  resolved "http://registry.npm.taobao.org/mongodb-core/download/mongodb-core-2.1.18.tgz#4c46139bdf3a1f032ded91db49f38eec01659050"
+  dependencies:
+    bson "~1.0.4"
+    require_optional "~1.0.0"
+
 mongodb-core@3.1.0:
   version "3.1.0"
   resolved "http://registry.npm.taobao.org/mongodb-core/download/mongodb-core-3.1.0.tgz#af91f36fd560ed785f4e61e694432df4d3698aad"
@@ -1881,6 +1922,14 @@ mongodb-core@3.1.0:
     require_optional "^1.0.1"
   optionalDependencies:
     saslprep "^1.0.0"
+
+mongodb@2.2.34:
+  version "2.2.34"
+  resolved "http://registry.npm.taobao.org/mongodb/download/mongodb-2.2.34.tgz#a34f59bbeb61754aec432de72c3fe21526a44c1a"
+  dependencies:
+    es6-promise "3.2.1"
+    mongodb-core "2.1.18"
+    readable-stream "2.2.7"
 
 mongodb@3.1.0:
   version "3.1.0"
@@ -1891,6 +1940,28 @@ mongodb@3.1.0:
 mongoose-legacy-pluralize@1.0.2:
   version "1.0.2"
   resolved "http://registry.npm.taobao.org/mongoose-legacy-pluralize/download/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
+
+mongoose-timestamp@^0.4.0:
+  version "0.4.0"
+  resolved "http://registry.npm.taobao.org/mongoose-timestamp/download/mongoose-timestamp-0.4.0.tgz#92bcacd16872a6987a723862b724fb868c074527"
+
+mongoose@^4.2.4:
+  version "4.13.17"
+  resolved "http://registry.npm.taobao.org/mongoose/download/mongoose-4.13.17.tgz#0af0396b1e5af027edf404518c62cc194de7d17a"
+  dependencies:
+    async "2.6.0"
+    bson "~1.0.4"
+    hooks-fixed "2.0.2"
+    kareem "1.5.0"
+    lodash.get "4.4.2"
+    mongodb "2.2.34"
+    mpath "0.5.1"
+    mpromise "0.5.5"
+    mquery "2.3.3"
+    ms "2.0.0"
+    muri "1.3.0"
+    regexp-clone "0.0.1"
+    sliced "1.0.1"
 
 mongoose@^5.2.1:
   version "5.2.1"
@@ -1913,6 +1984,23 @@ mpath@0.4.1:
   version "0.4.1"
   resolved "http://registry.npm.taobao.org/mpath/download/mpath-0.4.1.tgz#ed10388430380bf7bbb5be1391e5d6969cb08e89"
 
+mpath@0.5.1:
+  version "0.5.1"
+  resolved "http://registry.npm.taobao.org/mpath/download/mpath-0.5.1.tgz#17131501f1ff9e6e4fbc8ffa875aa7065b5775ab"
+
+mpromise@0.5.5:
+  version "0.5.5"
+  resolved "http://registry.npm.taobao.org/mpromise/download/mpromise-0.5.5.tgz#f5b24259d763acc2257b0a0c8c6d866fd51732e6"
+
+mquery@2.3.3:
+  version "2.3.3"
+  resolved "http://registry.npm.taobao.org/mquery/download/mquery-2.3.3.tgz#221412e5d4e7290ca5582dd16ea8f190a506b518"
+  dependencies:
+    bluebird "3.5.0"
+    debug "2.6.9"
+    regexp-clone "0.0.1"
+    sliced "0.0.5"
+
 mquery@3.0.0:
   version "3.0.0"
   resolved "http://registry.npm.taobao.org/mquery/download/mquery-3.0.0.tgz#e5f387dbabc0b9b69859e550e810faabe0ceabb0"
@@ -1925,6 +2013,10 @@ mquery@3.0.0:
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
+
+muri@1.3.0:
+  version "1.3.0"
+  resolved "http://registry.npm.taobao.org/muri/download/muri-1.3.0.tgz#aeccf3db64c56aa7c5b34e00f95b7878527a4721"
 
 mute-stream@0.0.7:
   version "0.0.7"
@@ -2243,6 +2335,10 @@ prepend-http@^1.0.1:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
 
+process-nextick-args@~1.0.6:
+  version "1.0.7"
+  resolved "http://registry.npm.taobao.org/process-nextick-args/download/process-nextick-args-1.0.7.tgz#150e20b756590ad3f91093f25a4f2ad8bff30ba3"
+
 process-nextick-args@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.0.tgz#a37d732f4271b4ab1ad070d35508e8290788ffaa"
@@ -2419,6 +2515,18 @@ readable-stream@2, readable-stream@^2.0.2, readable-stream@^2.0.6:
     string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
 
+readable-stream@2.2.7:
+  version "2.2.7"
+  resolved "http://registry.npm.taobao.org/readable-stream/download/readable-stream-2.2.7.tgz#07057acbe2467b22042d36f98c5ad507054e95b1"
+  dependencies:
+    buffer-shims "~1.0.0"
+    core-util-is "~1.0.0"
+    inherits "~2.0.1"
+    isarray "~1.0.0"
+    process-nextick-args "~1.0.6"
+    string_decoder "~1.0.0"
+    util-deprecate "~1.0.1"
+
 readdirp@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/readdirp/-/readdirp-2.1.0.tgz#4ed0ad060df3073300c48440373f72d1cc642d78"
@@ -2524,7 +2632,7 @@ require-uncached@^1.0.3:
     caller-path "^0.1.0"
     resolve-from "^1.0.0"
 
-require_optional@^1.0.1:
+require_optional@^1.0.1, require_optional@~1.0.0:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/require_optional/download/require_optional-1.0.1.tgz#4cf35a4247f64ca3df8c2ef208cc494b1ca8fc2e"
   dependencies:
@@ -2590,6 +2698,12 @@ rxjs@^5.5.2:
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.11.tgz#f733027ca43e3bec6b994473be4ab98ad43ced87"
   dependencies:
     symbol-observable "1.0.1"
+
+rxjs@^6.3.2:
+  version "6.3.2"
+  resolved "http://registry.npm.taobao.org/rxjs/download/rxjs-6.3.2.tgz#6a688b16c4e6e980e62ea805ec30648e1c60907f"
+  dependencies:
+    tslib "^1.9.0"
 
 safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
@@ -2816,6 +2930,12 @@ string.prototype.matchall@^2.0.0:
     has-symbols "^1.0.0"
     regexp.prototype.flags "^1.2.0"
 
+string_decoder@~1.0.0:
+  version "1.0.3"
+  resolved "http://registry.npm.taobao.org/string_decoder/download/string_decoder-1.0.3.tgz#0fc67d7c141825de94282dd536bec6b9bce860ab"
+  dependencies:
+    safe-buffer "~5.1.0"
+
 string_decoder@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
@@ -2970,6 +3090,10 @@ tough-cookie@~2.3.3:
   resolved "http://registry.npm.taobao.org/tough-cookie/download/tough-cookie-2.3.4.tgz#ec60cee38ac675063ffc97a5c18970578ee83655"
   dependencies:
     punycode "^1.4.1"
+
+tslib@^1.9.0:
+  version "1.9.3"
+  resolved "http://registry.npm.taobao.org/tslib/download/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
 
 tunnel-agent@^0.6.0:
   version "0.6.0"

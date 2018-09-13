@@ -1,12 +1,23 @@
 /**
- * 获取消息内容，
- * 有翻页功能
+ * 将所有私信同步至mongo，初始化
  */
 const getCookie = require('../model/user').getCookie
 const get163Msgs = require('./get163Msgs')
+const Rx = require('rxjs')
+
+const polling = async (postData, userData, page) => {
+  console.log(page)
+  const resData = await get163Msgs(postData, userData)
+  if (resData)
+}
+
+const syncMsg = (userId, userData, onnext) =>
+  new Promise((resolve, reject) => {
+
+  })
 
 module.exports = async (ctx, next) => {
-  if ('POST' !== ctx.method || !/msgs/.test(ctx.url)) {
+  if ('POST' !== ctx.method || !/syncMsg/.test(ctx.url)) {
     ctx.body = {
       code: -1,
       msg: '系统错误'
@@ -44,7 +55,12 @@ module.exports = async (ctx, next) => {
       ctx.session.csrf = userData.csrf
       ctx.session.MUSIC_U = userData.MUSIC_U
     }
-    resData = await get163Msgs(postData, userData)
+
+    syncMsg(postData, userData, (mgsList) => {
+
+    })
+
+
     ctx.body = {
       code: 0,
       data: resData,
@@ -65,5 +81,4 @@ module.exports = async (ctx, next) => {
     }
     await next()
   }
-
 }
