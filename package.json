@@ -11,6 +11,7 @@
   "dependencies": {
     "crypto-js": "^3.1.9-1",
     "debug": "^2.6.3",
+    "elasticsearch": "^15.1.1",
     "eslint": "^5.0.1",
     "koa": "^2.2.0",
     "koa-bodyparser": "^3.2.0",

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-// const msgSchema = mongoose.Schema()
 const dialogSchema = mongoose.Schema({
+  _id: String,
   friendId: Number,
   msgList: [{
     id: Number,
@@ -22,7 +22,10 @@ const dialogSchema = mongoose.Schema({
 const Dialog = mongoose.model('Dialog', dialogSchema)
 
 const mongoURL = 'mongodb://localhost/neteaseMsg'
-const connectMongo = () => new Promise((resolve, reject) => {
+const connectMongo = (dbConnect) => new Promise((resolve, reject) => {
+  if (dbConnect) {
+    return resolve(dbConnect)
+  }
   mongoose.connect(mongoURL)
   const db = mongoose.connection
   db.on('error', () => {
@@ -30,6 +33,25 @@ const connectMongo = () => new Promise((resolve, reject) => {
     reject()
   })
   db.once('open', resolve(db))
+})
+
+const checkDialog = (selfId, userId) => new Promise((resolve, reject) => {
+  let dialogId = `${selfId}-${userId}`
+
+  Dialog.find({ _id: dialogId }, (err, data) => {
+    if (err || data.length === 0) {
+      dialogId = `${userId}-${selfId}`
+      Dialog.find({ _id: dialogId }, (err, data) => {
+        if (err || data.length === 0) {
+          reject(err)
+        } else {
+          resolve(dialogId)
+        }
+      })
+    } else {
+      resolve(dialogId)
+    }
+  })
 })
 
 
@@ -40,70 +62,93 @@ module.exports = {
       db.close()
     })
   },
-  fillDialog: (selfId, userId, msgs) => {
-    console.log('newDialog')
-    console.log(selfId)
-    console.log(userId)
+  open: async () => new Promise((resolve, reject) => {
+    mongoose.connect(mongoURL)
+    const db = mongoose.connection
+    db.on('error', () => {
+      console.error.bind(console, 'connection error:')
+      reject()
+    })
+    db.once('open', resolve(db))
+  }),
+  close: (db) => db.close(),
+  fillDialog: (db, selfId, userId, msgs) => {
     return new Promise((resolve, reject) => {
-      return connectMongo().then((db) => {
+      return connectMongo(db).then(() => {
         console.log('mongo opened')
-        let dialogId = ''
-        if (Dialog[`${selfId}-${userId}`]) {
-          dialogId = `${selfId}-${userId}`
-        } else if (Dialog[`${userId}-${selfId}`]) {
-          dialogId = `${userId}-${selfId}`
-        }
-        if (dialogId.length > 0) {
-          Dialog.updateOne({ _id: dialogId }, {$push: msgs}, (err, res) => {
+        checkDialog(selfId, userId).then(dialogId => {
+          Dialog.updateOne({ _id: dialogId }, {$push: { msgList: msgs }}, (err, res) => {
             if (err) {
               console.log('写入失败')
-              db.close()
               reject()
             } else {
               console.log('写入成功')
-              console.log(res)
               resolve()
             }
           })
-        } else {
-          // 创建一个用户
-          const user = new User({
-            csrf: userData.__csrf,
-            MUSIC_U: userData.MUSIC_U
+        }, () => {
+          // 创建一个对话
+          const dialog = new Dialog({
+            _id: `${selfId}-${userId}`,
+            msgList: msgs,
           })
-          user.save((err, user) => {
+          dialog.save((err, dialog) => {
             if (err) {
-              console.log('创建用户失败')
-              db.close()
+              console.log('创建对话失败')
               reject(err)
             } else {
-              console.log('创建用户成功')
-              console.log(user)
-              db.close()
-              resolve(user._id)
+              console.log('创建对话成功')
+              console.log(dialog)
+              resolve(dialog._id)
             }
           })
-        }
+        })
       })
     })
   },
-  getCookie: (uid) => new Promise((resolve, reject) => {
-    return connectMongo().then((db) => {
-      console.log('mongo opened')
-      User.find({ _id: uid }, (err, data) => {
-        if (err) {
-          db.close()
-          reject(err)
-        } else {
-          console.log(data)
-          db.close()
+
+  getMsg: ({ selfId, userId, offset, limit }) => new Promise((resolve, reject) => {
+    return connectMongo().then(() => {
+      console.log('get msg')
+      checkDialog(selfId, userId).then(dialogId => {
+        console.log(dialogId)
+        Dialog
+          .findOne(
+            { _id: dialogId },
+            {
+              'msgList': {
+                $slice: [parseInt(offset), parseInt(limit)]
+              }
+            },
+            (err, result) => {
+              console.log(result)
+              if (err) {
+                reject(err)
+              }
+              const resData = {}
+              resData.msg = result.msgList
+              resData.more = result.msgList.length === limit
+              resolve(resData)
+            },
+          )
+
+      }, err => {
+        if (err === null) {
           resolve({
-            neteaseUid: data[0].neteaseUid,
-            csrf: data[0].csrf,
-            MUSIC_U: data[0].MUSIC_U
+            msg: [],
+            more: false,
           })
+          return
         }
+        console.log(err)
+        reject(err)
       })
+    })
+  }),
+
+  searchMsg: ({ db, keyword }) => new Promise((resolve, reject) => {
+    return connectMongo().then(() => {
+
     })
   })
 }

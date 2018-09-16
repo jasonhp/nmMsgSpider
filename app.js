@@ -12,6 +12,9 @@ const login = require('./controllers/login')
 const logout = require('./controllers/logout')
 const getUsers = require('./controllers/getMsgUsers')
 const getMsg = require('./controllers/getMsg')
+const sync = require('./controllers/syncMsg').sync
+const getServerMsg = require('./controllers/getServerMsg')
+const search = require('./controllers/search')
 
 const SESS_CONFIG = {
   key: 'sessionid', /** (string) cookie key (default is koa:sess) */
@@ -57,6 +60,9 @@ router.post('/login', login)
 router.get('/logout', logout)
 router.get('/users', getUsers)
 router.post('/msgs', getMsg)
+router.post('/sync', sync)
+router.post('/serverMsg', getServerMsg)
+router.get('/search/:keyword', search)
 
 app.use(router.routes()).use(router.allowedMethods())
 

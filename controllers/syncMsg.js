@@ -3,21 +3,53 @@
  */
 const getCookie = require('../model/user').getCookie
 const get163Msgs = require('./get163Msgs')
-const Rx = require('rxjs')
+const msgDb = require('../model/msgData')
 
-const polling = async (postData, userData, page) => {
-  console.log(page)
-  const resData = await get163Msgs(postData, userData)
-  if (resData)
+const polling = (postData, userData, onnext) =>
+  get163Msgs(postData, userData).then(async resData => {
+    if (!resData.msgs) {
+      return Promise.reject()
+    }
+    await onnext(resData)
+    console.log('more? ', resData.more)
+    if (resData.more) {
+      // resolve()
+      postData.time = resData.msgs.slice(-1)[0].time
+      console.log(postData.time)
+      return polling(postData, userData, onnext)
+    } else {
+      console.log('no more')
+      return Promise.resolve()
+    }
+  }, () => Promise.reject())
+
+module.exports.syncMsg = (postData, userData) => {
+  const pollPostData = {
+    limit: 100,
+    time: -1,
+    userId: postData.userId
+  }
+  console.log(pollPostData)
+  return msgDb.open().then((db) => {
+    console.log('db opened')
+    return polling(pollPostData, userData, (msgData) => {
+      console.log(msgData.msgs.length)
+      return msgDb.fillDialog(db, userData.neteaseUid, pollPostData.userId, msgData.msgs).then(() => {
+        console.log(' dialog saved')
+      })
+    }).then(() => {
+      console.log('polling finished')
+
+      msgDb.close(db)
+    })
+  }, err => {
+    console.log('db not open')
+    console.log(err)
+  })
 }
 
-const syncMsg = (userId, userData, onnext) =>
-  new Promise((resolve, reject) => {
-
-  })
-
-module.exports = async (ctx, next) => {
-  if ('POST' !== ctx.method || !/syncMsg/.test(ctx.url)) {
+module.exports.sync = async (ctx, next) => {
+  if ('POST' !== ctx.method || !/sync/.test(ctx.url)) {
     ctx.body = {
       code: -1,
       msg: '系统错误'
@@ -41,7 +73,7 @@ module.exports = async (ctx, next) => {
     }
     return false
   }
-  let userData, resData
+  let userData
   try {
     if (ctx.session.csrf) {
       userData = {
@@ -56,14 +88,11 @@ module.exports = async (ctx, next) => {
       ctx.session.MUSIC_U = userData.MUSIC_U
     }
 
-    syncMsg(postData, userData, (mgsList) => {
-
-    })
-
+    await module.exports.syncMsg(postData, userData)
 
     ctx.body = {
       code: 0,
-      data: resData,
+      data: 'sync finished',
     }
     await next()
   } catch (err) {
