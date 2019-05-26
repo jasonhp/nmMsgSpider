@@ -45,8 +45,6 @@ module.exports = async (ctx, next) => {
       ctx.session.MUSIC_U = userData.MUSIC_U
     }
 
-    console.log(postData)
-
     let msgData = await msgDb.getMsg({
       selfId: userData.neteaseUid,
       userId: postData.userId,

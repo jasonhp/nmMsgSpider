@@ -12,7 +12,6 @@ module.exports = (postData, userData) => {
   queryParams.csrf_token = userData.csrf
   queryParams = postDataGen(queryParams)
   const cookieStr = `__csrf=${userData.csrf}; MUSIC_U=${userData.MUSIC_U};`
-  console.log('requesting 163')
   return request({
     url: `https://music.163.com/weapi/msg/private/history?csrf_token=${userData.csrf || ''}`,
     method: 'post',
@@ -25,18 +24,61 @@ module.exports = (postData, userData) => {
   }).then((res) => {
     const resData = JSON.parse(res)
     if (resData.code === 200) {
-      console.log('message got')
       const msgs = resData.msgs.map((msg) => {
         const msgData = JSON.parse(msg.msg)
         let msgObj = {
           type: msgData.type,
           content: msgData.msg,
         }
-        if (msgData.type === 16) {
-          msgObj.picUrl = msgData.picInfo.picUrl
-        }
-        if (msgData.type === 1) {
-          msgObj.song = msgData.song.name
+        switch (msgData.type) {
+          case 16:
+            // 图片
+            msgObj.picUrl = msgData.picInfo.picUrl
+            break
+          case 1:
+            // 歌
+            msgObj.song = msgData.song.name
+            msgObj.artist = msgData.song.artists.reduce(
+              (acc, cur, idx) =>
+                `${acc}${(idx === 0 ? '' : '、')}${cur.name}`,
+              ''
+            )
+            if (msgData.song.artists.length > 1) {
+              console.log(msgObj.artist)
+            }
+            break
+          case 7:
+            // mv
+            msgObj.mvName = msgData.mv.name
+            msgObj.mvArtist = msgData.mv.artist.name
+            break
+          case 5:
+            // 电台
+            msgObj.radioName = msgData.program.radio.name
+            break
+          case 2:
+            // 专辑
+            msgObj.albumName = msgData.album.name
+            msgObj.albumArtist = msgData.album.artist.name
+            break
+          case 24:
+            // 视频
+            msgObj.videoName = msgData.video.title
+            break
+          case 15:
+            // 评论
+            msgObj.commentContent = msgData.comment.content
+            msgObj.commentFrom = msgData.comment.resourceName
+            break
+          case 4:
+            // 歌单
+            msgObj.playlistName = msgData.playlist.name
+            break
+          case 6:
+            break
+          default:
+            console.error('未知 type', msgData.type)
+            console.error(msg)
         }
         return {
           fromUser: {

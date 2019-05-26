@@ -98,7 +98,6 @@ module.exports = {
               reject(err)
             } else {
               console.log('创建对话成功')
-              console.log(dialog)
               resolve(dialog._id)
             }
           })
@@ -121,7 +120,6 @@ module.exports = {
               }
             },
             (err, result) => {
-              console.log(result)
               if (err) {
                 reject(err)
               }
@@ -146,9 +144,34 @@ module.exports = {
     })
   }),
 
-  searchMsg: ({ db, keyword }) => new Promise((resolve, reject) => {
+  getAllMsg: ({ selfId, userId }) => new Promise((resolve, reject) => {
     return connectMongo().then(() => {
-
+      console.log('get all msg')
+      checkDialog(selfId, userId).then(dialogId => {
+        console.log(dialogId)
+        Dialog
+          .findOne(
+            { _id: dialogId },
+            'msgList',
+            (err, result) => {
+              if (err) {
+                reject(err)
+              }
+              const resData = {}
+              resData.msg = result.msgList
+              resolve(resData)
+            },
+          )
+      }, err => {
+        if (err === null) {
+          resolve({
+            msg: [],
+          })
+          return
+        }
+        console.log(err)
+        reject(err)
+      })
     })
   })
 }

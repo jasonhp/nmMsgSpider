@@ -9,6 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "crypto-js": "^3.1.9-1",
     "debug": "^2.6.3",
     "elasticsearch": "^15.1.1",
@@ -23,12 +24,16 @@
     "koa-session": "^5.8.1",
     "koa-static": "^3.0.0",
     "koa-views": "^5.2.1",
+    "moment": "^2.22.2",
+    "momentjs": "^2.0.0",
     "mongo-connector": "^0.0.2",
     "mongoose": "^5.2.1",
+    "pdfkit": "^0.8.3",
     "pug": "^2.0.0-rc.1",
     "request": "^2.87.0",
     "request-promise-native": "^1.0.5",
-    "rxjs": "^6.3.2"
+    "rxjs": "^6.3.2",
+    "sync-request": "^6.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.8.1"

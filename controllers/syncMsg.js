@@ -11,11 +11,9 @@ const polling = (postData, userData, onnext) =>
       return Promise.reject()
     }
     await onnext(resData)
-    console.log('more? ', resData.more)
     if (resData.more) {
       // resolve()
       postData.time = resData.msgs.slice(-1)[0].time
-      console.log(postData.time)
       return polling(postData, userData, onnext)
     } else {
       console.log('no more')
@@ -29,17 +27,12 @@ module.exports.syncMsg = (postData, userData) => {
     time: -1,
     userId: postData.userId
   }
-  console.log(pollPostData)
   return msgDb.open().then((db) => {
     console.log('db opened')
     return polling(pollPostData, userData, (msgData) => {
-      console.log(msgData.msgs.length)
-      return msgDb.fillDialog(db, userData.neteaseUid, pollPostData.userId, msgData.msgs).then(() => {
-        console.log(' dialog saved')
-      })
+      return msgDb.fillDialog(db, userData.neteaseUid, pollPostData.userId, msgData.msgs)
     }).then(() => {
       console.log('polling finished')
-
       msgDb.close(db)
     })
   }, err => {
