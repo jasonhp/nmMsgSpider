@@ -27,7 +27,7 @@
     "moment": "^2.22.2",
     "momentjs": "^2.0.0",
     "mongo-connector": "^0.0.2",
-    "mongoose": "^5.2.1",
+    "mongoose": "^5.7.5",
     "pdfkit": "^0.8.3",
     "pug": "^2.0.0-rc.1",
     "request": "^2.87.0",
